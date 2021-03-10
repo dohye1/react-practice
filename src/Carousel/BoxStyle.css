@@ -1,0 +1,22 @@
+.box-container {
+  display: flex;
+  width: 600px;
+  height: 60px;
+  align-items: center;
+}
+
+.label {
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  border: 2px solid white;
+}
+
+.info-block {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+p {
+  margin: 0 10px;
+}
