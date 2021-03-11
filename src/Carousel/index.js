@@ -15,9 +15,10 @@ function Market() {
   const slideDurationRef = useRef(1000);
   const prevMarketInfoRef = useRef();
   const curMarketInfoRef = useRef();
+  const debounceRef = useRef();
 
   function handleSlide(e) {
-    if (e.target.dataset.direction === 'left') {
+    if (e && e.target.dataset.direction === 'left') {
       curIndexRef.current = 0;
       if (curMarketRef.current === 0) {
         curMarketRef.current = 3;
@@ -40,6 +41,8 @@ function Market() {
       setMarketInfo({});
       slideDurationRef.current = 1000;
     }, 1000);
+
+    debounce();
   }
 
   const getMarketInfo = useCallback(() => {
@@ -67,8 +70,16 @@ function Market() {
       .catch((err) => console.error(err));
   }, []);
 
+  const debounce = () => {
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      handleSlide();
+    }, 5000);
+  };
+
   useEffect(() => {
     getMarketInfo();
+    debounce();
   }, []);
 
   return (
