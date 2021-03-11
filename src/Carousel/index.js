@@ -17,16 +17,20 @@ function Market() {
 
   const curIndexRef = useRef(1); // 박스 순서
   const curMarketRef = useRef(0); // 데이터 순서
+  const slideDurationRef = useRef(300);
   const prevMarketRef = useRef();
 
   function handleSlideLeft() {
-    // 3번 인덱스의 박스를 보여줌
-    if (curIndexRef.current === 0) {
-      curIndexRef.current = 3;
-      curMarketRef.current = 2;
-    } else if (curIndexRef.current === 1) {
+    if (curIndexRef.current === 1) {
       curIndexRef.current -= 1;
       curMarketRef.current = 3;
+      setTimeout(() => {
+        slideDurationRef.current = 0;
+        curIndexRef.current = 4;
+        curMarketRef.current = 3;
+        setMarketInfo(prevMarketRef.current);
+        slideDurationRef.current = 300;
+      }, 300);
     } else {
       curIndexRef.current -= 1;
       curMarketRef.current -= 1;
@@ -35,12 +39,16 @@ function Market() {
   }
 
   function handleSlideRight() {
-    if (curIndexRef.current === 5) {
-      curIndexRef.current = 2;
-      curMarketRef.current = 1;
-    } else if (curIndexRef.current === 4) {
+    if (curIndexRef.current === 4) {
       curIndexRef.current += 1;
       curMarketRef.current = 0;
+      setTimeout(() => {
+        slideDurationRef.current = 0;
+        curIndexRef.current = 1;
+        curMarketRef.current = 0;
+        setMarketInfo(prevMarketRef.current);
+        slideDurationRef.current = 300;
+      }, 300);
     } else {
       curIndexRef.current += 1;
       curMarketRef.current += 1;
@@ -58,6 +66,12 @@ function Market() {
           signed_change_price,
           signed_change_rate
         } = res[0];
+        prevMarketRef.current = {
+          market,
+          trade_price,
+          signed_change_price,
+          signed_change_rate
+        };
         setMarketInfo({
           market,
           trade_price,
@@ -85,15 +99,16 @@ function Market() {
       <div
         className='slide-box'
         style={{
-          transform: `translate3d(calc(-600px * ${curIndexRef.current}), 0, 0)`
+          transform: `translate3d(calc(-600px * ${curIndexRef.current}), 0, 0)`,
+          transition: `${slideDurationRef.current}ms`
         }}
       >
-        <Box data-market-info={3} data-index={0} {...marketInfo} />
-        <Box data-market-info={0} data-index={1} {...marketInfo} />
-        <Box data-market-info={1} data-index={2} {...marketInfo} />
-        <Box data-market-info={2} data-index={3} {...marketInfo} />
-        <Box data-market-info={3} data-index={4} {...marketInfo} />
-        <Box data-market-info={0} data-index={5} {...marketInfo} />
+        <Box {...marketInfo} />
+        <Box {...marketInfo} />
+        <Box {...marketInfo} />
+        <Box {...marketInfo} />
+        <Box {...marketInfo} />
+        <Box {...marketInfo} />
       </div>
     </div>
   );
