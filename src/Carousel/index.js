@@ -8,52 +8,38 @@ const BASE_URL = 'https://api.upbit.com/v1/ticker';
 const MARKETS = ['BTC', 'ETH', 'XRP', 'PCI'];
 
 function Market() {
-  const [marketInfo, setMarketInfo] = useState({
-    market: '',
-    trade_price: 0,
-    signed_change_price: 0,
-    signed_change_rate: 0
-  });
+  const [marketInfo, setMarketInfo] = useState();
 
   const curIndexRef = useRef(1); // 박스 순서
   const curMarketRef = useRef(0); // 데이터 순서
-  const slideDurationRef = useRef(300);
-  const prevMarketRef = useRef();
+  const slideDurationRef = useRef(1000);
+  const prevMarketInfoRef = useRef();
+  const curMarketInfoRef = useRef();
 
-  function handleSlideLeft() {
-    if (curIndexRef.current === 1) {
-      curIndexRef.current -= 1;
-      curMarketRef.current = 3;
-      setTimeout(() => {
-        slideDurationRef.current = 0;
-        curIndexRef.current = 4;
+  function handleSlide(e) {
+    if (e.target.dataset.direction === 'left') {
+      curIndexRef.current = 0;
+      if (curMarketRef.current === 0) {
         curMarketRef.current = 3;
-        setMarketInfo(prevMarketRef.current);
-        slideDurationRef.current = 300;
-      }, 300);
+      } else {
+        curMarketRef.current -= 1;
+      }
     } else {
-      curIndexRef.current -= 1;
-      curMarketRef.current -= 1;
-    }
-    getMarketInfo();
-  }
-
-  function handleSlideRight() {
-    if (curIndexRef.current === 4) {
-      curIndexRef.current += 1;
-      curMarketRef.current = 0;
-      setTimeout(() => {
-        slideDurationRef.current = 0;
-        curIndexRef.current = 1;
+      curIndexRef.current = 2;
+      if (curMarketRef.current === 3) {
         curMarketRef.current = 0;
-        setMarketInfo(prevMarketRef.current);
-        slideDurationRef.current = 300;
-      }, 300);
-    } else {
-      curIndexRef.current += 1;
-      curMarketRef.current += 1;
+      } else {
+        curMarketRef.current += 1;
+      }
     }
     getMarketInfo();
+    setTimeout(() => {
+      slideDurationRef.current = 0;
+      curIndexRef.current = 1;
+      prevMarketInfoRef.current = curMarketInfoRef.current;
+      setMarketInfo({});
+      slideDurationRef.current = 1000;
+    }, 1000);
   }
 
   const getMarketInfo = useCallback(() => {
@@ -66,18 +52,17 @@ function Market() {
           signed_change_price,
           signed_change_rate
         } = res[0];
-        prevMarketRef.current = {
+        const response = {
           market,
           trade_price,
           signed_change_price,
           signed_change_rate
         };
-        setMarketInfo({
-          market,
-          trade_price,
-          signed_change_price,
-          signed_change_rate
-        });
+        if (!prevMarketInfoRef.current) {
+          prevMarketInfoRef.current = response;
+        }
+        curMarketInfoRef.current = response;
+        setMarketInfo(response);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -89,10 +74,18 @@ function Market() {
   return (
     <div className='container'>
       <div className='direction'>
-        <button onClick={handleSlideLeft} className='direction-button'>
+        <button
+          data-direction='left'
+          onClick={handleSlide}
+          className='direction-button'
+        >
           ‹
         </button>
-        <button onClick={handleSlideRight} className='direction-button'>
+        <button
+          data-direction='right'
+          onClick={handleSlide}
+          className='direction-button'
+        >
           ›
         </button>
       </div>
@@ -104,10 +97,7 @@ function Market() {
         }}
       >
         <Box {...marketInfo} />
-        <Box {...marketInfo} />
-        <Box {...marketInfo} />
-        <Box {...marketInfo} />
-        <Box {...marketInfo} />
+        <Box {...prevMarketInfoRef.current} />
         <Box {...marketInfo} />
       </div>
     </div>
