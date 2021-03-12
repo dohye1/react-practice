@@ -17,6 +17,12 @@ function Market() {
   const curMarketInfoRef = useRef();
   const debounceRef = useRef();
 
+  const debounce = () => {
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      handleSlide();
+    }, 5000);
+  };
   function handleSlide(e) {
     if (e && e.target.dataset.direction === 'left') {
       curIndexRef.current = 0;
@@ -70,13 +76,6 @@ function Market() {
       .catch((err) => console.error(err));
   }, []);
 
-  const debounce = () => {
-    clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      handleSlide();
-    }, 5000);
-  };
-
   useEffect(() => {
     getMarketInfo();
     debounce();
@@ -103,7 +102,7 @@ function Market() {
       <div
         className='slide-box'
         style={{
-          transform: `translate3d(calc(-600px * ${curIndexRef.current}), 0, 0)`,
+          transform: `translate3d(${-600 * curIndexRef.current}px, 0, 0)`,
           transition: `${slideDurationRef.current}ms`
         }}
       >
