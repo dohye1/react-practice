@@ -1,7 +1,15 @@
 import './App.css';
+import WebSocketProvider from './WebSocketProvider';
+import Stock from './Stock';
 
 function App() {
-  return <div className='App'></div>;
+  return (
+    <div className='App'>
+      <WebSocketProvider>
+        <Stock />
+      </WebSocketProvider>
+    </div>
+  );
 }
 
 export default App;
