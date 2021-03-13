@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { WebSocketContext } from '../../WebSocketProvider';
+import Account from '../Account';
 import './style.css';
 
 function Stock() {
@@ -11,7 +12,9 @@ function Stock() {
   };
   return (
     <div className='container'>
-      <h2 className='title'>비트코인</h2>
+      <div className='title'>
+        <h2>비트코인</h2>
+      </div>
       <div className='cur-info'>
         <div className={!!parseInt(stock?.scp) ? 'down' : 'up'}>
           <h3>
@@ -31,6 +34,7 @@ function Stock() {
           </h3>
         </div>
       </div>
+      <Account />
     </div>
   );
 }
