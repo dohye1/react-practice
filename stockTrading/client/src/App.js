@@ -1,6 +1,6 @@
 import './App.css';
 import WebSocketProvider from './WebSocketProvider';
-import Stock from './Stock';
+import Stock from './components/Stock';
 
 function App() {
   return (
