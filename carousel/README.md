@@ -1,7 +1,7 @@
 # Carousel Basic
 
 <p align="center">
-  <img src="https://media.vlpt.us/images/dolarge/post/db6b8cb2-9140-44e9-9657-9e92659b08fe/ezgif.com-gif-maker%20(29).gif" />
+  <img src="https://media.vlpt.us/images/dolarge/post/dc85c2b0-b1fe-4218-b1a8-c0c219661c06/ezgif.com-gif-maker%20(33).gif" />
   </p>
 
 ---
