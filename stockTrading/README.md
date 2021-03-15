@@ -1,8 +1,7 @@
 # Stock Trading
 
 <p align="center">
-  <img src="https://media.vlpt.us/images/dolarge/post/28c10500-8a8a-4822-82d3-9c7e461b520a/ezgif.com-gif-maker%20(32).gif
-" />
+  <img src="https://media.vlpt.us/images/dolarge/post/28c10500-8a8a-4822-82d3-9c7e461b520a/ezgif.com-gif-maker%20(32).gif" />
   </p>
 
 # 구현 내용
