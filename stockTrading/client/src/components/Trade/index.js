@@ -26,7 +26,7 @@ function Trade({ seed, countStock }) {
         return;
       }
       seed.current += stockCount * fixedPriceRef.current;
-      countStock.current -= stockCount;
+      countStock.current = Number(countStock.current) - Number(stockCount);
     }
   }
   useEffect(() => {
@@ -58,7 +58,8 @@ function Trade({ seed, countStock }) {
       </div>
       <div className='trade-info'>
         <h4>
-          price : {(fixedPriceRef?.current).toLocaleString()}{' '}
+          price :{' '}
+          {fixedPriceRef.current ? fixedPriceRef.current.toLocaleString() : 0}{' '}
           <span
             onClick={() => {
               getFixedPrice();
