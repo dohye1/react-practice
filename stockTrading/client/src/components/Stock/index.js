@@ -1,15 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { WebSocketContext } from '../../WebSocketProvider';
 import Account from '../Account';
 import './style.css';
 
 function Stock() {
-  const ws = useContext(WebSocketContext);
-  const [stock, setStock] = useState();
-  ws.onmessage = (message) => {
-    setStock(JSON.parse(message.data));
-    //const { hp, lp, tp, scp, scr, tms } = wsData;
-  };
+  const stock = useContext(WebSocketContext);
+
   return (
     <div className='container'>
       <div className='title'>
