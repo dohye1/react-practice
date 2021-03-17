@@ -1,13 +1,14 @@
 import './App.css';
-import WebSocketProvider from './WebSocketProvider';
+import TickerProvider from './TickerProvider';
+import OrderBookProvider from './OrderBookProvider';
 import Stock from './components/Stock';
 
 function App() {
   return (
     <div className='App'>
-      <WebSocketProvider>
+      <TickerProvider>
         <Stock />
-      </WebSocketProvider>
+      </TickerProvider>
     </div>
   );
 }

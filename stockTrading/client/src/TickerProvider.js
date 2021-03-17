@@ -1,9 +1,9 @@
 import React, { createContext, useRef, useState } from 'react';
 
-export const WebSocketContext = createContext();
+export const TickerContext = createContext();
 const URL = `ws://localhost:5000`;
 
-function WebSocketProvider({ children }) {
+function TickerProvider({ children }) {
   const wsRef = useRef();
   const [stock, setStock] = useState();
   if (!wsRef.current) {
@@ -19,11 +19,11 @@ function WebSocketProvider({ children }) {
     };
   }
 
-  return (
-    <WebSocketContext.Provider value={stock}>
-      {children}
-    </WebSocketContext.Provider>
+  return stock ? (
+    <TickerContext.Provider value={stock}>{children}</TickerContext.Provider>
+  ) : (
+    <p>Loading...</p>
   );
 }
 
-export default WebSocketProvider;
+export default TickerProvider;
