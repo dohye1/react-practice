@@ -1,6 +1,5 @@
 import './App.css';
 import TickerProvider from './TickerProvider';
-import OrderBookProvider from './OrderBookProvider';
 import Stock from './components/Stock';
 
 function App() {
