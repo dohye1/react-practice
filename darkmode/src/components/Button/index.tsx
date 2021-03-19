@@ -6,7 +6,7 @@ interface ButtonProps {
   handleClick: () => void
 }
 
-function Button({ title, handleClick }: ButtonProps) {
+const Button = ({ title, handleClick }: ButtonProps) => {
   return (
     <S.Main onClick={handleClick}>
       <p>{'버튼 > ' + title}</p>
