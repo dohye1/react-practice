@@ -3,13 +3,11 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from 'style/GlobalStyle'
 import Button from 'components/Button'
 import { dark, light } from 'style/theme'
+import useTheme from 'hooks/useTheme'
 
 function App() {
-  const [themeMode, setThemeMode] = useState('light')
+  const [themeMode, toggleTheme] = useTheme()
   const theme = themeMode === 'light' ? { mode: light } : { mode: dark }
-
-  const toggleTheme = () =>
-    setThemeMode(themeMode === 'light' ? 'dark' : 'light')
 
   return (
     <ThemeProvider theme={theme}>
