@@ -1,6 +1,6 @@
 # darkmode
 
-react, typescript, styped-component를 사용해 다크모드 만들기
+react, typescript, styped-component를 사용해 다크모드 기능 구현해보기
 
 # 알아두기
 
