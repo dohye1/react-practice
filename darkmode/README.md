@@ -4,14 +4,16 @@ react, typescript, styped-component를 사용해 다크모드 만들기
 
 # 알아두기
 
-1. tsconfig파일에서 컴파일 옵션에
+## 1. 절대경로설정 
+   tsconfig파일에서 컴파일 옵션에
    `"baseUrl": "./src"`
    를 추가하면,
 
 각 파일에서 src를 절대경로로, 다른 파일들을 import 할 수 있다.
+
 그래서 파일의 경로가 복잡해져도 src기준으로 파일을 import 하기때문에 덜 복잡하게 사용할 수 있다.
 
-# 핵심 (MDN 참고)
+## 2. 다크모드 구현시 중요?한 내용 (MDN 참고)
 
 > `@media`
 
@@ -58,7 +60,7 @@ if (window.matchMedia('(min-width: 400px)').matches) {
 
 위의 예시처럼 원하는 조건을 문자열로 넘겨주고 matches 프로퍼티는 boolean 값을 반환한다.
 
-## dark mode 구현
+### dark mode 구현
 
 위의 메서드와 개념을 사용해 다크모드를 구현한 코드를 보면
 
