@@ -2,6 +2,10 @@
 
 react, typescript, styped-component를 사용해 다크모드 만들기
 
+<p align="center">
+  <img src="https://media.vlpt.us/images/dolarge/post/4ad1b483-0ab1-48f4-a144-7bd3e25e56bf/ezgif.com-gif-maker%20(34).gif" />
+  </p>
+
 # 알아두기
 
 1. tsconfig파일에서 컴파일 옵션에
