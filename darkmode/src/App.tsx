@@ -12,7 +12,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Button title={themeMode} handleClick={toggleTheme} />
+      <Button mode={themeMode} handleClick={toggleTheme} />
     </ThemeProvider>
   )
 }

@@ -9,7 +9,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body{
+        width:100%;
+        height:100%;
         background-color: ${({ theme }) => theme.mode.mainBackground};
+        transition:0.5s;
     }
 `
 export default GlobalStyle
