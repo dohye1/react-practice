@@ -2,14 +2,19 @@ import React from 'react'
 import * as S from './style'
 
 interface ButtonProps {
-  title: string
+  mode: string
   handleClick: () => void
 }
 
-const Button = ({ title, handleClick }: ButtonProps) => {
+const Button = ({ mode, handleClick }: ButtonProps) => {
   return (
-    <S.Main onClick={handleClick}>
-      <p>{'버튼 > ' + title}</p>
+    <S.Main onClick={handleClick} mode={mode}>
+      <S.Mode mode={mode}>
+        {mode === 'light' ? 'LIGHT MODE' : 'DARK MODE'}
+      </S.Mode>
+      <S.ToggleBall mode={mode}>
+        <span>{mode === 'light' ? '🌞' : '🌛'}</span>
+      </S.ToggleBall>
     </S.Main>
   )
 }
